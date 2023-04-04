@@ -1,8 +1,16 @@
+import { getAnalytics, logEvent } from "firebase/analytics";
+import { useState } from "react";
 import AppleLogin from "react-apple-login";
+import Test from "../src/components/Test";
 import "./App.css";
+
 function App() {
   // "https://apple-login-project.web.app/signup/sns/redirect/apple/type/login"
   // https://kinderlabs.monster/signupadd
+
+  const analytics = getAnalytics();
+  const [error, setError] = useState(false);
+
   return (
     <>
       <AppleLogin
@@ -25,7 +33,33 @@ function App() {
         }}
       />
 
-      <div>hihi</div>
+      {error && new Error("error")}
+      <button onClick={() => setError(true)}>show error</button>
+
+      <div>buybuy2</div>
+      <button
+        onClick={() => {
+          logEvent(analytics, "basket", {
+            content_type: "image",
+            content_id: "P12453",
+          });
+        }}
+      >
+        이벤트 발생합니다.
+      </button>
+      <button
+        onClick={() => {
+          logEvent(analytics, "firebaseTestclickEvent", {
+            content_type: "image",
+            content_id: "P12453",
+          });
+        }}
+      >
+        이벤트 발생합니다.
+      </button>
+      <div>
+        <Test />
+      </div>
     </>
   );
 }

@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@firebase/analytics": "^0.9.3",
+    "@sentry/react": "^7.46.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
+    "firebase": "^9.17.1",
     "firebase-tools": "^11.22.0",
     "react": "^17.0.2",
     "react-apple-login": "^1.1.6",
@@ -38,5 +41,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "source-map-loader": "^4.0.1"
   }
 }

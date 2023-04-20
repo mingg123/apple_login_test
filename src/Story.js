@@ -6,7 +6,7 @@ function Story() {
           throw Error("Story Error");
         }}
       >
-        Story show error(6.0)
+        Story show error(7.0)
       </button>
     </div>
   );

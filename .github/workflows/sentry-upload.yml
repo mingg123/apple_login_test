@@ -21,19 +21,12 @@ jobs:
           VERSION=$(sentry-cli releases propose-version)
           echo "::set-output name=version::$VERSION"
 
-      - name: Sentry Set Commits
-        run: |
-          sentry-cli releases set-commits --auto ${{ steps.sentry_release.outputs.version }}
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: kinderlabs-b6
-          SENTRY_PROJECT: apple-login
-
       - name: Build and Upload Source Maps
         run: |
           yarn
           yarn build
-          sentry-cli releases files ${{ steps.sentry_release.outputs.version }} upload-sourcemaps build
+          sentry-cli releases new apple6.0
+          sentry-cli releases files apple6.0 upload-sourcemaps build
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: kinderlabs-b6

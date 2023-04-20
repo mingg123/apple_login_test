@@ -13,13 +13,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Sentry CLI
-        run: yarn add @sentry/cli
+        run: npm install -g @sentry/cli
 
       - name: Sentry Release
         id: sentry_release
         run: |
-          VERSION=$(sentry-cli releases propose-version)
-          echo "::set-output name=version::$VERSION"
           yarn
           yarn build
 
@@ -30,11 +28,15 @@ jobs:
         with:
           files: "build/index.html"
 
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+
       - name: Source Map Upload
         if: steps.my-app-build.outputs.files_exists == 'true'
         run: |
-          sentry-cli releases new apple11.0
-          sentry-cli releases files apple11.0 upload-sourcemaps build
+          sentry-cli releases new ${{ steps.package-version.outputs.current-version}}
+          sentry-cli releases files ${{ steps.package-version.outputs.current-version}} upload-sourcemaps build
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: kinderlabs-b6

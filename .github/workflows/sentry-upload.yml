@@ -22,15 +22,15 @@ jobs:
           echo "::set-output name=version::$VERSION"
           yarn
 
-      # POS ADMIN BUILD & DEPLOY
-      - name: Check POS ADMIN BUILD
-        id: vaunce-app-build
+      # BUILD & DEPLOY
+      - name: Check APP BUILD
+        id: my-app-build
         uses: andstor/file-existence-action@v2
         with:
           files: "build/index.html"
 
-      - name: DEPLOY Firebase (Pos Admin)
-        if: steps.vaunce-app-build.outputs.files_exists == 'true'
+      - name: Source Map Upload
+        if: steps.my-app-build.outputs.files_exists == 'true'
         run: |
           sentry-cli releases new apple11.0
           sentry-cli releases files apple11.0 upload-sourcemaps build
@@ -40,6 +40,6 @@ jobs:
           SENTRY_PROJECT: apple-login
 
       - name: Remove sourcemap
-        if: steps.vaunce-app-build.outputs.files_exists == 'true'
+        if: steps.my-app-build.outputs.files_exists == 'true'
         run: |
           rm -rf build/

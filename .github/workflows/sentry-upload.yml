@@ -22,11 +22,12 @@ jobs:
           echo "::set-output name=version::$VERSION"
 
       - name: Sentry Set Commits
-        uses: Sentry/integrations@7df46349be6ac9cd710c56d8042fa7d902e1c8b7
-        with:
-          repository: ${{ github.repository }}
-          commit: ${{ github.sha }}
-          version: ${{ steps.sentry_release.outputs.version }}
+        run: |
+          sentry-cli releases set-commits --auto ${{ steps.sentry_release.outputs.version }}
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: kinderlabs-b6
+          SENTRY_PROJECT: vaunce-app
 
       - name: Build and Upload Source Maps
         run: |
@@ -38,5 +39,5 @@ jobs:
             ./build/static/js/
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: kinderlabs-b5
+          SENTRY_ORG: kinderlabs-b6
           SENTRY_PROJECT: vaunce-app

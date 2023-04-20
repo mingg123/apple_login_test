@@ -41,9 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "copy-webpack-plugin": "^11.0.0",
-    "source-map-loader": "^4.0.1"
   }
 }

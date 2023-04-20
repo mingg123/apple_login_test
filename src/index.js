@@ -29,7 +29,7 @@ Sentry.init({
     new Sentry.BrowserTracing(),
     new Sentry.Integrations.Breadcrumbs({ console: true }),
   ],
-  release: "apple2.0",
+  release: "apple4.0",
   tracesSampleRate: 1.0,
 });
 

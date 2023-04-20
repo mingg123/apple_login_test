@@ -1,0 +1,42 @@
+name: Sentry Upload
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sentry-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Sentry CLI
+        run: npm install -g @sentry/cli
+
+      - name: Sentry Release
+        id: sentry_release
+        run: |
+          VERSION=$(sentry-cli releases propose-version)
+          echo "::set-output name=version::$VERSION"
+
+      - name: Sentry Set Commits
+        uses: Sentry/integrations@7df46349be6ac9cd710c56d8042fa7d902e1c8b7
+        with:
+          repository: ${{ github.repository }}
+          commit: ${{ github.sha }}
+          version: ${{ steps.sentry_release.outputs.version }}
+
+      - name: Build and Upload Source Maps
+        run: |
+          yarn build
+          sentry-cli releases files ${{ steps.sentry_release.outputs.version }} upload-sourcemaps \
+            --rewrite \
+            --url-prefix "~/static/js" \
+            --validate \
+            ./build/static/js/
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: kinderlabs-b5
+          SENTRY_PROJECT: vaunce-app

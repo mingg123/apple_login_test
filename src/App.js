@@ -1,6 +1,7 @@
 import { getAnalytics, logEvent } from "firebase/analytics";
 import { useState } from "react";
 import AppleLogin from "react-apple-login";
+import Home from "../src/Home";
 import Test from "../src/components/Test";
 import "./App.css";
 
@@ -33,6 +34,7 @@ function App() {
         }}
       />
 
+      <Home />
       {error && new Error("error")}
       <button onClick={() => setError(true)}>show error</button>
 

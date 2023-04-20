@@ -32,8 +32,8 @@ jobs:
       - name: DEPLOY Firebase (Pos Admin)
         if: steps.vaunce-app-build.outputs.files_exists == 'true'
         run: |
-          sentry-cli releases new apple8.0
-          sentry-cli releases files apple8.0 upload-sourcemaps build
+          sentry-cli releases new apple9.0
+          sentry-cli releases files apple9.0 upload-sourcemaps build
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: kinderlabs-b6

@@ -28,7 +28,7 @@ Sentry.init({
     new Sentry.BrowserTracing(),
     new Sentry.Integrations.Breadcrumbs({ console: true }),
   ],
-  release: "apple6.0",
+  release: "apple7.0",
   tracesSampleRate: 1.0,
 });
 

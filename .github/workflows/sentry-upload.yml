@@ -21,21 +21,25 @@ jobs:
           VERSION=$(sentry-cli releases propose-version)
           echo "::set-output name=version::$VERSION"
           yarn
-          yarn build
 
       # POS ADMIN BUILD & DEPLOY
       - name: Check POS ADMIN BUILD
-        id: pos_admin_exists
+        id: vaunce-app-build
         uses: andstor/file-existence-action@v2
         with:
           files: "build/index.html"
 
       - name: DEPLOY Firebase (Pos Admin)
-        if: steps.pos_admin_exists.outputs.files_exists == 'true'
+        if: steps.vaunce-app-build.outputs.files_exists == 'true'
         run: |
-          sentry-cli releases new apple7.0
-          sentry-cli releases files apple7.0 upload-sourcemaps build
+          sentry-cli releases new apple8.0
+          sentry-cli releases files apple8.0 upload-sourcemaps build
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: kinderlabs-b6
           SENTRY_PROJECT: apple-login
+
+      - name: Remove sourcemap
+        if: steps.vaunce-app-build.outputs.files_exists == 'true'
+        run: |
+          rm -rf build/

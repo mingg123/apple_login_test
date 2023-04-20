@@ -1,7 +1,4 @@
-import { useState } from "react";
-
 function Home() {
-  const [error, setError] = useState(false);
   return (
     <div>
       {/* {error && new Error("error")}

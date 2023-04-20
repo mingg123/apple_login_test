@@ -1,6 +1,4 @@
-import { useState } from "react";
 function Test() {
-  const [error, setError] = useState(false);
   const user = {
     name: "hihi",
   };

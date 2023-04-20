@@ -31,6 +31,7 @@ jobs:
 
       - name: Build and Upload Source Maps
         run: |
+          yarn
           yarn build
           sentry-cli releases files ${{ steps.sentry_release.outputs.version }} upload-sourcemaps build
         env:

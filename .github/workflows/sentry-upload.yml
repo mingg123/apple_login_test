@@ -32,11 +32,7 @@ jobs:
       - name: Build and Upload Source Maps
         run: |
           yarn build
-          sentry-cli releases files ${{ steps.sentry_release.outputs.version }} upload-sourcemaps \
-            --rewrite \
-            --url-prefix "~/static/js" \
-            --validate \
-            ./build/static/js/
+          sentry-cli releases files ${{ steps.sentry_release.outputs.version }} upload-sourcemaps build
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: kinderlabs-b6

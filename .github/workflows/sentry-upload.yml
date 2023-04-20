@@ -27,7 +27,7 @@ jobs:
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: kinderlabs-b6
-          SENTRY_PROJECT: vaunce-app
+          SENTRY_PROJECT: apple-login
 
       - name: Build and Upload Source Maps
         run: |
@@ -37,4 +37,4 @@ jobs:
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: kinderlabs-b6
-          SENTRY_PROJECT: vaunce-app
+          SENTRY_PROJECT: apple-login

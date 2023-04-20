@@ -23,8 +23,15 @@ jobs:
           yarn
           yarn build
 
-      - name: Build and Upload Source Maps
-        if: success() &&  exists('build')
+      # POS ADMIN BUILD & DEPLOY
+      - name: Check POS ADMIN BUILD
+        id: pos_admin_exists
+        uses: andstor/file-existence-action@v2
+        with:
+          files: "build/index.html"
+
+      - name: DEPLOY Firebase (Pos Admin)
+        if: steps.pos_admin_exists.outputs.files_exists == 'true'
         run: |
           sentry-cli releases new apple7.0
           sentry-cli releases files apple7.0 upload-sourcemaps build

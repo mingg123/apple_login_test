@@ -39,5 +39,5 @@ jobs:
           sentry-cli releases files ${{ steps.sentry_release.outputs.version }} upload-sourcemaps build
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${env_org}
-          SENTRY_PROJECT: ${env_project}
+          SENTRY_ORG: $env_org
+          SENTRY_PROJECT: $env_project

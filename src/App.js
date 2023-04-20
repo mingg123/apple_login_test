@@ -4,6 +4,7 @@ import AppleLogin from "react-apple-login";
 import Home from "../src/Home";
 import Test from "../src/components/Test";
 import "./App.css";
+import Story from "./Story";
 
 function App() {
   // "https://apple-login-project.web.app/signup/sns/redirect/apple/type/login"
@@ -35,6 +36,7 @@ function App() {
       />
 
       <Home />
+      <Story />
       {error && new Error("error")}
       <button onClick={() => setError(true)}>show error</button>
 

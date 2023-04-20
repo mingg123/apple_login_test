@@ -24,7 +24,7 @@ jobs:
           yarn build
 
       - name: Build and Upload Source Maps
-        if: exists('build')
+        if: success() &&  exists('build')
         run: |
           sentry-cli releases new apple7.0
           sentry-cli releases files apple7.0 upload-sourcemaps build

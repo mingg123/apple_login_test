@@ -5,8 +5,8 @@ on:
     branches:
       - main
 env:
-  SENTRY_ORG: ${{ variables.SENTRY_ORG }}
-  SENTRY_PROJECT: ${{ variables.SENTRY_PROJECT }}
+  SENTRY_ORG: kinderlabs-b6
+  SENTRY_PROJECT: apple-login
 
 jobs:
   sentry-upload:

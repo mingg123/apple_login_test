@@ -21,6 +21,7 @@ jobs:
           VERSION=$(sentry-cli releases propose-version)
           echo "::set-output name=version::$VERSION"
           yarn
+          yarn build
 
       # BUILD & DEPLOY
       - name: Check APP BUILD

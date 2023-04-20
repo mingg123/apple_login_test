@@ -26,8 +26,8 @@ jobs:
           sentry-cli releases set-commits --auto ${{ steps.sentry_release.outputs.version }}
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: kinderlabs-b6
-          SENTRY_PROJECT: apple-login
+          SENTRY_ORG: ${{ variables.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ variables.SENTRY_PROJECT }}
 
       - name: Build and Upload Source Maps
         run: |
@@ -36,5 +36,5 @@ jobs:
           sentry-cli releases files ${{ steps.sentry_release.outputs.version }} upload-sourcemaps build
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: kinderlabs-b6
-          SENTRY_PROJECT: apple-login
+          SENTRY_ORG: ${{ variables.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ variables.SENTRY_PROJECT }}

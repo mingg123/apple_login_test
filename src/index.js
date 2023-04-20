@@ -20,7 +20,7 @@ const firebaseConfig = {
   measurementId: "G-0V1GYR165B",
 };
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig); // eslint-disable-line no-unused-vars
 
 Sentry.init({
   dsn: "https://1d9bd6d960614142bacf76f5342371ec@o4504885204221952.ingest.sentry.io/4504953403604992",

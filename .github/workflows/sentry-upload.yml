@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+env:
+  env_org: ${{ vars.SENTRY_ORG }}
+  env_project: ${{ vars.SENTRY_PROJECT }}
 
 jobs:
   sentry-upload:
@@ -36,5 +39,5 @@ jobs:
           sentry-cli releases files ${{ steps.sentry_release.outputs.version }} upload-sourcemaps build
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ vars.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
+          SENTRY_ORG: ${env_org}
+          SENTRY_PROJECT: ${env_project}
